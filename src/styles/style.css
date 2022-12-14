@@ -1,9 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+
 :root {
+    --text-color: #fff;
+    --color-primary: #06f;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
     background: url('../assets/wave-haikei.svg') no-repeat center center fixed;
     background-size: cover;
+    margin: 0;
+    padding: 20px;
     width: 100%;
     height: 100%;
+    color: var(--text-color);
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.2em;
+}
+
+#weather {
+    display: grid;
+    grid-template-columns: 300px 300px;
+    grid-row: 1fr 1fr;
+    gap: 10px;
+    margin: 10px;
+}
+
+#weather > div {
+    background-color: var(--color-primary);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.weather-misc {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+}
+
+.weather-temperature {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.weather-wind {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
 }
