@@ -23,9 +23,9 @@ function processWeatherData(json) {
         name: json.name,
         temperature: {
             current: json.main.temp,
-            min: json.main.temp_min,
-            max: json.main.temp_max,
             feelsLike: json.main.feels_like,
+            max: json.main.temp_max,
+            min: json.main.temp_min,
         },
         humidity: json.main.humidity,
         pressure: json.main.pressure,
@@ -52,36 +52,61 @@ function removeWeatherDOM(data) {
 }
 
 function createWeatherDOM(data) {
-    const weather = data;
-    const temperature = { ...weather.temperature };
-    const wind = { ...weather.wind };
+    const basicWeather = {
+        name: data.name,
+        temperature: data.temperature.current,
+        humidity: data.humidity,
+        pressure: data.pressure,
+        wind: data.wind.speed,
+    };
+    const temperature = { ...data.temperature };
+
+    console.log(basicWeather);
 
     const weatherDiv = document.createElement('div');
     weatherDiv.id = 'weather';
     document.body.appendChild(weatherDiv);
 
-    function createMiscData() {
+    function weatherData() {
         const div = document.createElement('div');
-        div.className = 'weather-misc';
+        div.className = 'weather-main';
         weatherDiv.appendChild(div);
 
-        const heading = document.createElement('h3');
-        heading.textContent = `Weather: ${data.name}`;
+        const name = () => {
+            const heading = document.createElement('h3');
+            heading.textContent = `Weather: ${basicWeather.name}`;
+            div.appendChild(heading);
+        };
 
-        div.appendChild(heading);
+        const temp = () => {
+            const para = document.createElement('p');
+            para.textContent = `Temperature: ${basicWeather.temperature}`;
+            div.appendChild(para);
+        };
 
-        for (const property in data) {
-            if (typeof data[property] !== 'object') {
-                const para = document.createElement('p');
-                para.textContent = `${property}: ${data[property]}`;
-                div.appendChild(para);
-            }
-        }
+        const humidity = () => {
+            const para = document.createElement('p');
+            para.textContent = `Humidity: ${basicWeather.humidity}`;
+            div.appendChild(para);
+        };
+
+        const wind = () => {
+            const para = document.createElement('p');
+            para.textContent = `Wind: ${basicWeather.wind}km/h`;
+            div.appendChild(para);
+        };
+
+        name();
+        temp();
+        humidity();
+        wind();
     }
 
-    function createTemperatureData() {
+    function temperatureData() {
+        const tempColor = temperature.current * 6;
         const div = document.createElement('div');
         div.className = 'weather-temperature';
+        div.style.backgroundColor = `rgb(${tempColor},100,0)`;
         weatherDiv.appendChild(div);
 
         const heading = document.createElement('h3');
@@ -95,23 +120,6 @@ function createWeatherDOM(data) {
         }
     }
 
-    function createWindData() {
-        const div = document.createElement('div');
-        div.className = 'weather-wind';
-        weatherDiv.appendChild(div);
-
-        const heading = document.createElement('h3');
-        heading.textContent = 'Wind';
-        div.appendChild(heading);
-
-        for (const property in wind) {
-            const para = document.createElement('p');
-            para.textContent = `${property}: ${wind[property]}`;
-            div.appendChild(para);
-        }
-    }
-
-    createMiscData();
-    createTemperatureData();
-    createWindData();
+    weatherData();
+    temperatureData();
 }
