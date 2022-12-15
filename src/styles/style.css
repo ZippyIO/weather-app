@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
 
 :root {
-    --text-color: #fff;
-    --color-primary: #06f;
+    --text-color: #ffffff;
+    --color-primary: #0066ff;
 }
 
 * {
@@ -25,14 +25,6 @@ body {
     grid-template-rows: 32px 1fr;
 }
 
-button {
-    background-color: var(--color-primary);
-    border: none;
-    border-radius: 12px;
-    width: 100px;
-    height: 32px;
-}
-
 form {
     font-size: 0;
 }
@@ -44,6 +36,25 @@ input {
     width: 196px;
     height: 32px;
     margin-right: 4px;
+}
+
+button {
+    background-color: #0066ff;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    border-radius: 12px;
+    width: 100px;
+    height: 32px;
+}
+
+button:hover {
+    background-color: #004fc5;
+}
+
+button:active {
+    background-color: #003a91;
 }
 
 #weather {

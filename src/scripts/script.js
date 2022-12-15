@@ -34,7 +34,6 @@ function processWeatherData(json) {
             direction: json.wind.deg,
         },
     };
-    console.log(data);
     removeWeatherDOM(data);
 }
 
@@ -60,8 +59,6 @@ function createWeatherDOM(data) {
         wind: data.wind.speed,
     };
     const temperature = { ...data.temperature };
-
-    console.log(basicWeather);
 
     const weatherDiv = document.createElement('div');
     weatherDiv.id = 'weather';
